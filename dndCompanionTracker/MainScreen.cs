@@ -24,6 +24,7 @@ namespace dndCompanionTracker {
 			this.tb_hpVal.KeyPress += new KeyPressEventHandler(checkKeys);
 			statblocks = new List<CreatureStatblock>();
 			loadCreaturesFromFile();
+
 		}
 
 		public IndexResult indexToImport;
@@ -235,7 +236,8 @@ namespace dndCompanionTracker {
 				senseString = senseString.Substring(0, senseString.Length - stringTrim);
 			}
 
-			string specialActionString = formatActions(currentCreature.SpecialAbilities);
+			//TODO: fix
+			string specialActionString = ""; //formatActions(currentCreature.SpecialAbilities);
 
 			tb_traits.Text = $@"Speed: {speedString}
 Saving Throws: {savingThrowString}
@@ -252,35 +254,245 @@ Challenge: { currentCreature.CR } ({ currentCreature.XP } XP)
 
 			#endregion
 
+			formatAllActions();
+
+		}
+
+		public void formatAllActions() {
+
+			pl_actions.Controls.Clear();
+
+			int marginPadding = 25;
+			int width = pl_actions.Width - marginPadding;
+			Font defaultFont = gb_statblock.Font;
+
+			var labels = new List<Label>();
+
 			#region Actions
 
-			string actionString = formatActions(currentCreature.Actions);
+			var actionLabel = new Label();
 
-			string legendActionString = $@"Legendary Actions
------------------------------------------------------------------
-The {currentCreature.Name} can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. The {currentCreature.Name} regains spent legendary actions at the start of its turn.
+			actionLabel.Width = width;
+			actionLabel.AutoSize = true;
+			actionLabel.MaximumSize = new Size(width, 0);
+			actionLabel.Text = "Actions\n";
+			actionLabel.Text += "-----------------------------------------------------------------\n";
+			actionLabel.Font = new Font(defaultFont, FontStyle.Bold);
 
-";
+			actionLabel.Location = new Point(0, pl_actions.Top - marginPadding);
 
-			if (currentCreature.LegendaryActions.Any()) {
-				legendActionString += formatActions(currentCreature.LegendaryActions);
-			} else {
-				legendActionString = "";
+			pl_actions.Controls.Add(actionLabel);
+			labels.Add(actionLabel);
+
+			bool checkboxesAdded = false;
+
+			foreach (var action in currentCreature.Actions) {
+
+				var newLabel = new Label();
+				newLabel.AutoSize = true;
+				newLabel.MaximumSize = new Size(width, 0);
+
+				var (checkBoxes, actionString) = formatActions(action);
+
+				newLabel.Width = width;
+				newLabel.Text = actionString;
+
+				var x = labels.Last().Location.X;
+				var y = labels.Last().Location.Y + labels.Last().Height;
+
+				newLabel.Location = new Point(x, y);
+
+				pl_actions.Controls.Add(newLabel);
+				labels.Add(newLabel);
+
+				//add checkboxes if needed
+				//also reset button
+				//if (checkBoxes) {
+
+				//	int? count = action.Usage.Times;
+
+				//	if (!count.HasValue) {
+				//		Console.WriteLine("fuck, how did we get here");
+				//		throw new Exception();
+				//	}
+
+				//	for (int i = 0; i < count.Value; i++) {
+
+				//		var checkbox = new CheckBox();
+
+				//		var cbx = labels.Last().Location.X + (i * 20) + checkbox.Width;
+				//		var cby = labels.Last().Location.Y + labels.Last().Height;
+
+				//		checkbox.Location = new Point(cbx, cby);
+
+				//		pl_actions.Controls.Add((CheckBox)checkbox);
+
+				//	}
+
+				//	checkboxesAdded = true;
+
+				//}
+
 			}
 
-			string reactionString = formatActions(currentCreature.Reactions);
+			#endregion
 
-			tb_actions.Text = 
-$@"Actions
------------------------------------------------------------------
-{ actionString }
+			#region Legendary_Actions
 
-{ legendActionString }
+			//TODO: Add
+			if (checkboxesAdded) {
 
-Reactions
------------------------------------------------------------------
-{  reactionString }
-";
+			}
+
+			if (currentCreature.LegendaryActions.Any()) {
+
+				var legendActionLabel = new Label();
+
+				legendActionLabel.Width = width;
+				legendActionLabel.AutoSize = true;
+				legendActionLabel.MaximumSize = new Size(width, 0);
+				legendActionLabel.Text = "\nLegendary Actions\n";
+				legendActionLabel.Text += "-----------------------------------------------------------------\n";
+				legendActionLabel.Font = new Font(defaultFont, FontStyle.Bold);
+
+				var x = labels.Last().Location.X;
+				var y = labels.Last().Location.Y + labels.Last().Height;
+
+				legendActionLabel.Location = new Point(x, y);
+
+				pl_actions.Controls.Add(legendActionLabel);
+				labels.Add(legendActionLabel);
+
+				foreach (var action in currentCreature.LegendaryActions) {
+
+					var newLabel = new Label();
+					newLabel.AutoSize = true;
+					newLabel.MaximumSize = new Size(width, 0);
+
+					var (checkBoxes, actionString) = formatActions(action);
+
+					newLabel.Width = width;
+					newLabel.Text = actionString;
+
+					x = labels.Last().Location.X;
+					y = labels.Last().Location.Y + labels.Last().Height;
+
+					newLabel.Location = new Point(x, y);
+
+					pl_actions.Controls.Add(newLabel);
+					labels.Add(newLabel);
+
+					//add checkboxes if needed
+					//also reset button
+					//if (checkBoxes) {
+
+					//	int? count = action.Usage.Times;
+
+					//	if (!count.HasValue) {
+					//		Console.WriteLine("fuck, how did we get here");
+					//		throw new Exception();
+					//	}
+
+					//	for (int i = 0; i < count.Value; i++) {
+
+					//		var checkbox = new CheckBox();
+
+					//		var cbx = labels.Last().Location.X + (i * 20) + checkbox.Width;
+					//		var cby = labels.Last().Location.Y + labels.Last().Height;
+
+					//		checkbox.Location = new Point(cbx, cby);
+
+					//		pl_actions.Controls.Add((CheckBox)checkbox);
+
+					//	}
+
+					//	checkboxesAdded = true;
+
+					//}
+
+				}
+
+			}
+
+			#endregion
+
+			#region Reactions
+
+			//TODO: Add
+			if (checkboxesAdded) {
+
+			}
+
+			if (currentCreature.Reactions != null && currentCreature.Reactions.Any()) {
+
+				var reactionLabel = new Label();
+
+				reactionLabel.Width = width;
+				reactionLabel.AutoSize = true;
+				reactionLabel.MaximumSize = new Size(width, 0);
+				reactionLabel.Text = "\nReactions\n";
+				reactionLabel.Text += "-----------------------------------------------------------------\n";
+				reactionLabel.Font = new Font(defaultFont, FontStyle.Bold);
+
+				var x = labels.Last().Location.X;
+				var y = labels.Last().Location.Y + labels.Last().Height;
+
+				reactionLabel.Location = new Point(x, y);
+
+				pl_actions.Controls.Add(reactionLabel);
+				labels.Add(reactionLabel);
+
+				foreach (var action in currentCreature.Reactions) {
+
+					var newLabel = new Label();
+					newLabel.AutoSize = true;
+					newLabel.MaximumSize = new Size(width, 0);
+
+					var (checkBoxes, actionString) = formatActions(action);
+
+					newLabel.Width = width;
+					newLabel.Text = actionString;
+
+					x = labels.Last().Location.X;
+					y = labels.Last().Location.Y + labels.Last().Height;
+
+					newLabel.Location = new Point(x, y);
+
+					pl_actions.Controls.Add(newLabel);
+					labels.Add(newLabel);
+
+					//add checkboxes if needed
+					//also reset button
+					//if (checkBoxes) {
+
+					//	int? count = action.Usage.Times;
+
+					//	if (!count.HasValue) {
+					//		Console.WriteLine("fuck, how did we get here");
+					//		throw new Exception();
+					//	}
+
+					//	for (int i = 0; i < count.Value; i++) {
+
+					//		var checkbox = new CheckBox();
+
+					//		var cbx = labels.Last().Location.X + (i * 20) + checkbox.Width;
+					//		var cby = labels.Last().Location.Y + labels.Last().Height;
+
+					//		checkbox.Location = new Point(cbx, cby);
+
+					//		pl_actions.Controls.Add((CheckBox)checkbox);
+
+					//	}
+
+					//	checkboxesAdded = true;
+
+					//}
+
+				}
+
+			}
+
 
 			#endregion
 
@@ -387,46 +599,44 @@ Reactions
 
 		}
 
-		private string formatActions(List<CreatureActions> actions) {
+		private (bool, string) formatActions(CreatureAction action) {
 
 			var returnedString = "";
+			var needsCheckboxes = false;
 
-			if (actions == null) {
+			if (action == null) {
 
-				return returnedString;
+				return (needsCheckboxes, returnedString);
 
 			}
 
-			foreach (var action in actions ?? new List<CreatureActions>()) {
+			string useText = "";
 
-				string useText = "";
+			var usage = action.Usage;
 
-				var usage = action.Usage;
+			if (usage != null) {
 
-				if (usage != null) {
-
-					switch (usage.Type) {
-						case "at will":
-							break;
-						case "per day":
-							useText += $@" ({usage.Times}/Day)";
-							break;
-						case "recharge after rest":
-							break;
-						case "recharge on roll":
-							useText += $@" (Recharge {usage.MinValue}- { usage.Dice.Substring(usage.Dice.Length - 1, 1) })";
-							break;
+				switch (usage.Type) {
+					case "at will":
+						break;
+					case "per day":
+						useText += $@" ({usage.Times}/Day)";
+						needsCheckboxes = true;
+						break;
+					case "recharge after rest":
+						break;
+					case "recharge on roll":
+						useText += $@" (Recharge {usage.MinValue}- { usage.Dice.Substring(usage.Dice.Length - 1, 1) })";
+						break;
 					}
 
 				}
 
-				string a = $@"{action.Name}{useText}. {action.Description}";
+			string a = $@"{action.Name}{useText}. {action.Description}";
 
-				returnedString += a + "\n";
+			returnedString += a + "\n";
 
-			}
-
-			return returnedString;
+			return (needsCheckboxes, returnedString);
 
 		}
 

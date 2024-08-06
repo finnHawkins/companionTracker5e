@@ -33,7 +33,7 @@ namespace dndCompanionTracker {
 
 	#endregion
 
-	public class CreatureActions {
+	public class CreatureAction {
 
 		[JsonProperty("name")]
 		public string Name;
@@ -41,11 +41,8 @@ namespace dndCompanionTracker {
 		[JsonProperty("desc")]
 		public string Description;
 
-		public string UserDescription; //Used for storing formatting when using user input values
-
 		[JsonProperty("usage")]
 		public Usage Usage;
-
 
 	}
 
@@ -172,10 +169,10 @@ namespace dndCompanionTracker {
 		public List<Condition> ConditionImmunities;
 
 		[JsonProperty("actions")]
-		public List<CreatureActions> Actions;
+		public List<CreatureAction> Actions;
 
 		[JsonProperty("legendary_actions")]
-		public List<CreatureActions> LegendaryActions;
+		public List<CreatureAction> LegendaryActions;
 
 		[JsonProperty("senses")]
 		public Dictionary<string,string> Senses;
@@ -184,10 +181,10 @@ namespace dndCompanionTracker {
 		public string Languages;
 
 		[JsonProperty("reactions")]
-		public dynamic Reactions;
+		public List<CreatureAction> Reactions;
 
 		[JsonProperty("special_abilities")]
-		public List<CreatureActions> SpecialAbilities;
+		public List<CreatureAction> SpecialAbilities;
 
 		[JsonProperty("speed")]
 		public Dictionary<string, string> Speed;
@@ -196,12 +193,6 @@ namespace dndCompanionTracker {
 		public int? XP;
 
 		public int? CurrentHP;
-
-		public CreatureStatblock() {
-
-			//THIS DOESNT WORK AAA
-			this.CurrentHP = this.HP;
-		}
 
 	}
 

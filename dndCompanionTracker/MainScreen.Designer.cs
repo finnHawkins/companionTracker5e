@@ -34,7 +34,6 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.tb_spellMod = new System.Windows.Forms.TextBox();
 			this.btn_save = new System.Windows.Forms.Button();
-			this.tb_actions = new System.Windows.Forms.RichTextBox();
 			this.btn_addHealth = new System.Windows.Forms.Button();
 			this.btn_takeHealth = new System.Windows.Forms.Button();
 			this.tb_name = new System.Windows.Forms.TextBox();
@@ -73,6 +72,7 @@
 			this.gb_statblock = new System.Windows.Forms.GroupBox();
 			this.tb_hpVal = new System.Windows.Forms.TextBox();
 			this.button1 = new System.Windows.Forms.Button();
+			this.pl_actions = new System.Windows.Forms.Panel();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -94,12 +94,12 @@
 			// lsb_creatures
 			// 
 			this.lsb_creatures.BackColor = System.Drawing.Color.Beige;
-			this.lsb_creatures.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lsb_creatures.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lsb_creatures.FormattingEnabled = true;
-			this.lsb_creatures.ItemHeight = 16;
+			this.lsb_creatures.ItemHeight = 18;
 			this.lsb_creatures.Location = new System.Drawing.Point(12, 42);
 			this.lsb_creatures.Name = "lsb_creatures";
-			this.lsb_creatures.Size = new System.Drawing.Size(136, 516);
+			this.lsb_creatures.Size = new System.Drawing.Size(136, 508);
 			this.lsb_creatures.TabIndex = 1;
 			this.lsb_creatures.SelectedIndexChanged += new System.EventHandler(this.lsb_creatures_SelectedIndexChanged);
 			// 
@@ -188,18 +188,6 @@
 			this.btn_save.UseVisualStyleBackColor = true;
 			this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
 			// 
-			// tb_actions
-			// 
-			this.tb_actions.BackColor = System.Drawing.Color.Beige;
-			this.tb_actions.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.tb_actions.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.tb_actions.Location = new System.Drawing.Point(283, 19);
-			this.tb_actions.Name = "tb_actions";
-			this.tb_actions.ReadOnly = true;
-			this.tb_actions.Size = new System.Drawing.Size(528, 520);
-			this.tb_actions.TabIndex = 2;
-			this.tb_actions.Text = "Actions\nLegendary Actions\nReactions";
-			// 
 			// btn_addHealth
 			// 
 			this.btn_addHealth.BackColor = System.Drawing.Color.LightGreen;
@@ -231,7 +219,7 @@
 			this.tb_name.BackColor = System.Drawing.Color.Beige;
 			this.tb_name.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.tb_name.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.tb_name.ForeColor = System.Drawing.Color.Maroon;
+			this.tb_name.ForeColor = System.Drawing.Color.Brown;
 			this.tb_name.Location = new System.Drawing.Point(6, 19);
 			this.tb_name.Name = "tb_name";
 			this.tb_name.Size = new System.Drawing.Size(263, 22);
@@ -251,7 +239,7 @@
 			// 
 			// pictureBox1
 			// 
-			this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(29)))), ((int)(((byte)(4)))));
+			this.pictureBox1.BackColor = System.Drawing.Color.Brown;
 			this.pictureBox1.Location = new System.Drawing.Point(6, 72);
 			this.pictureBox1.Name = "pictureBox1";
 			this.pictureBox1.Size = new System.Drawing.Size(263, 2);
@@ -327,7 +315,7 @@
 			// 
 			// pictureBox2
 			// 
-			this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(29)))), ((int)(((byte)(4)))));
+			this.pictureBox2.BackColor = System.Drawing.Color.Brown;
 			this.pictureBox2.Location = new System.Drawing.Point(6, 170);
 			this.pictureBox2.Name = "pictureBox2";
 			this.pictureBox2.Size = new System.Drawing.Size(263, 2);
@@ -569,7 +557,7 @@
 			// 
 			// pictureBox3
 			// 
-			this.pictureBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(29)))), ((int)(((byte)(4)))));
+			this.pictureBox3.BackColor = System.Drawing.Color.Brown;
 			this.pictureBox3.Location = new System.Drawing.Point(6, 254);
 			this.pictureBox3.Name = "pictureBox3";
 			this.pictureBox3.Size = new System.Drawing.Size(263, 2);
@@ -578,10 +566,10 @@
 			// 
 			// pictureBox4
 			// 
-			this.pictureBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(29)))), ((int)(((byte)(4)))));
-			this.pictureBox4.Location = new System.Drawing.Point(275, 19);
+			this.pictureBox4.BackColor = System.Drawing.Color.Brown;
+			this.pictureBox4.Location = new System.Drawing.Point(436, 22);
 			this.pictureBox4.Name = "pictureBox4";
-			this.pictureBox4.Size = new System.Drawing.Size(2, 520);
+			this.pictureBox4.Size = new System.Drawing.Size(2, 535);
 			this.pictureBox4.TabIndex = 38;
 			this.pictureBox4.TabStop = false;
 			// 
@@ -589,7 +577,6 @@
 			// 
 			this.gb_statblock.BackColor = System.Drawing.Color.Transparent;
 			this.gb_statblock.Controls.Add(this.tb_hpVal);
-			this.gb_statblock.Controls.Add(this.pictureBox4);
 			this.gb_statblock.Controls.Add(this.pictureBox3);
 			this.gb_statblock.Controls.Add(this.lb_cha);
 			this.gb_statblock.Controls.Add(this.lb_wis);
@@ -624,12 +611,11 @@
 			this.gb_statblock.Controls.Add(this.tb_name);
 			this.gb_statblock.Controls.Add(this.btn_takeHealth);
 			this.gb_statblock.Controls.Add(this.btn_addHealth);
-			this.gb_statblock.Controls.Add(this.tb_actions);
 			this.gb_statblock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.gb_statblock.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gb_statblock.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.gb_statblock.Location = new System.Drawing.Point(154, 13);
 			this.gb_statblock.Name = "gb_statblock";
-			this.gb_statblock.Size = new System.Drawing.Size(817, 545);
+			this.gb_statblock.Size = new System.Drawing.Size(277, 545);
 			this.gb_statblock.TabIndex = 2;
 			this.gb_statblock.TabStop = false;
 			this.gb_statblock.Text = "Statblock";
@@ -655,6 +641,16 @@
 			this.button1.Text = "Edit Actions";
 			this.button1.UseVisualStyleBackColor = true;
 			// 
+			// pl_actions
+			// 
+			this.pl_actions.AutoScroll = true;
+			this.pl_actions.BackColor = System.Drawing.Color.Transparent;
+			this.pl_actions.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.pl_actions.Location = new System.Drawing.Point(444, 23);
+			this.pl_actions.Name = "pl_actions";
+			this.pl_actions.Size = new System.Drawing.Size(527, 535);
+			this.pl_actions.TabIndex = 39;
+			// 
 			// MainScreen
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -662,6 +658,8 @@
 			this.BackColor = System.Drawing.Color.Beige;
 			this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
 			this.ClientSize = new System.Drawing.Size(983, 606);
+			this.Controls.Add(this.pl_actions);
+			this.Controls.Add(this.pictureBox4);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.btn_save);
 			this.Controls.Add(this.tb_spellMod);
@@ -700,7 +698,6 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.TextBox tb_spellMod;
 		private System.Windows.Forms.Button btn_save;
-		private System.Windows.Forms.RichTextBox tb_actions;
 		private System.Windows.Forms.Button btn_addHealth;
 		private System.Windows.Forms.Button btn_takeHealth;
 		private System.Windows.Forms.TextBox tb_name;
@@ -739,6 +736,7 @@
 		private System.Windows.Forms.GroupBox gb_statblock;
 		private System.Windows.Forms.TextBox tb_hpVal;
 		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Panel pl_actions;
 	}
 }
 
