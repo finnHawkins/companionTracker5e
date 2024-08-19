@@ -105,6 +105,7 @@
 			// 
 			// btn_delete
 			// 
+			this.btn_delete.Enabled = false;
 			this.btn_delete.Font = new System.Drawing.Font("Palatino Linotype", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btn_delete.ForeColor = System.Drawing.Color.IndianRed;
 			this.btn_delete.Location = new System.Drawing.Point(12, 571);
@@ -113,6 +114,7 @@
 			this.btn_delete.TabIndex = 3;
 			this.btn_delete.Text = "Delete Creature";
 			this.btn_delete.UseVisualStyleBackColor = true;
+			this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
 			// 
 			// tb_proficiencyBonus
 			// 
@@ -193,11 +195,13 @@
 			this.btn_addHealth.BackColor = System.Drawing.Color.LightGreen;
 			this.btn_addHealth.FlatAppearance.BorderSize = 0;
 			this.btn_addHealth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btn_addHealth.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btn_addHealth.Location = new System.Drawing.Point(210, 85);
 			this.btn_addHealth.Name = "btn_addHealth";
 			this.btn_addHealth.Size = new System.Drawing.Size(50, 25);
 			this.btn_addHealth.TabIndex = 3;
 			this.btn_addHealth.Text = "+";
+			this.btn_addHealth.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			this.btn_addHealth.UseVisualStyleBackColor = false;
 			this.btn_addHealth.Click += new System.EventHandler(this.btn_addHealth_Click);
 			// 
@@ -206,11 +210,13 @@
 			this.btn_takeHealth.BackColor = System.Drawing.Color.IndianRed;
 			this.btn_takeHealth.FlatAppearance.BorderSize = 0;
 			this.btn_takeHealth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btn_takeHealth.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btn_takeHealth.Location = new System.Drawing.Point(210, 139);
 			this.btn_takeHealth.Name = "btn_takeHealth";
 			this.btn_takeHealth.Size = new System.Drawing.Size(50, 25);
 			this.btn_takeHealth.TabIndex = 4;
 			this.btn_takeHealth.Text = "-";
+			this.btn_takeHealth.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			this.btn_takeHealth.UseVisualStyleBackColor = false;
 			this.btn_takeHealth.Click += new System.EventHandler(this.btn_takeHealth_Click);
 			// 
@@ -497,7 +503,7 @@
 			// 
 			// lb_str
 			// 
-			this.lb_str.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lb_str.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lb_str.Location = new System.Drawing.Point(11, 233);
 			this.lb_str.Name = "lb_str";
 			this.lb_str.Size = new System.Drawing.Size(38, 18);
@@ -507,7 +513,7 @@
 			// 
 			// lb_dex
 			// 
-			this.lb_dex.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lb_dex.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lb_dex.Location = new System.Drawing.Point(55, 233);
 			this.lb_dex.Name = "lb_dex";
 			this.lb_dex.Size = new System.Drawing.Size(38, 18);
@@ -517,7 +523,7 @@
 			// 
 			// lb_con
 			// 
-			this.lb_con.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lb_con.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lb_con.Location = new System.Drawing.Point(99, 233);
 			this.lb_con.Name = "lb_con";
 			this.lb_con.Size = new System.Drawing.Size(38, 18);
@@ -527,7 +533,7 @@
 			// 
 			// lb_int
 			// 
-			this.lb_int.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lb_int.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lb_int.Location = new System.Drawing.Point(143, 233);
 			this.lb_int.Name = "lb_int";
 			this.lb_int.Size = new System.Drawing.Size(38, 18);
@@ -537,7 +543,7 @@
 			// 
 			// lb_wis
 			// 
-			this.lb_wis.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lb_wis.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lb_wis.Location = new System.Drawing.Point(187, 233);
 			this.lb_wis.Name = "lb_wis";
 			this.lb_wis.Size = new System.Drawing.Size(39, 18);
@@ -547,7 +553,7 @@
 			// 
 			// lb_cha
 			// 
-			this.lb_cha.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lb_cha.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lb_cha.Location = new System.Drawing.Point(232, 233);
 			this.lb_cha.Name = "lb_cha";
 			this.lb_cha.Size = new System.Drawing.Size(37, 18);

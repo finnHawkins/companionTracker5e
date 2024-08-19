@@ -56,11 +56,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionEditor.cs">
+    <Compile Include="CreatureEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ActionEditor.Designer.cs">
-      <DependentUpon>ActionEditor.cs</DependentUpon>
+    <Compile Include="CreatureEditor.Designer.cs">
+      <DependentUpon>CreatureEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="creatureClasses.cs" />
     <Compile Include="MainScreen.cs">
@@ -77,8 +77,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ActionEditor.resx">
-      <DependentUpon>ActionEditor.cs</DependentUpon>
+    <EmbeddedResource Include="CreatureEditor.resx">
+      <DependentUpon>CreatureEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainScreen.resx">
       <DependentUpon>MainScreen.cs</DependentUpon>

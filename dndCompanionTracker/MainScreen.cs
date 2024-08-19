@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -48,6 +49,12 @@ namespace dndCompanionTracker {
 			} else {
 
 				//save the details, and clear the form
+
+				var pc = null as CreatureStatblock;
+
+				CreatureEditor creatureEditor = new CreatureEditor(true, pc);
+
+
 
 			}
 
@@ -236,8 +243,36 @@ namespace dndCompanionTracker {
 				senseString = senseString.Substring(0, senseString.Length - stringTrim);
 			}
 
-			//TODO: fix
 			string specialActionString = ""; //formatActions(currentCreature.SpecialAbilities);
+
+			foreach (var action in currentCreature.SpecialAbilities ?? new List<CreatureAction>()) {
+
+				string useText = "";
+
+				var usage = action.Usage;
+
+				if (usage != null) {
+
+					switch (usage.Type) {
+						case "at will":
+							break;
+						case "per day":
+							useText += $@" ({usage.Times}/Day)";
+							break;
+						case "recharge after rest":
+							break;
+						case "recharge on roll":
+							useText += $@" (Recharge {usage.MinValue}- {usage.Dice.Substring(usage.Dice.Length - 1, 1)})";
+							break;
+					}
+
+				}
+
+				string a = $@"{action.Name}{useText}. {action.Description}";
+
+				specialActionString += a + "\n";
+
+			}
 
 			tb_traits.Text = $@"Speed: {speedString}
 Saving Throws: {savingThrowString}
@@ -587,6 +622,8 @@ Challenge: { currentCreature.CR } ({ currentCreature.XP } XP)
 			int.TryParse(tb_currHP.Text, out currentHealth);
 			int.TryParse(tb_maxHP.Text, out maxHealth);
 
+			//TODO: Check if temp HP box contains value and if so, edit that first
+
 			if(addHealth) {
 				newHealth = Math.Min(maxHealth, (currentHealth + healthMod));
 			} else {
@@ -664,8 +701,6 @@ Challenge: { currentCreature.CR } ({ currentCreature.XP } XP)
 
 			File.WriteAllText(LIST_FILE_NAME, jsonString);
 
-			Console.WriteLine(File.ReadAllText(LIST_FILE_NAME));
-
 			//save each creature to its own json file
 
 			foreach (var creature in statblocks ?? new List<CreatureStatblock>()) {
@@ -682,13 +717,16 @@ Challenge: { currentCreature.CR } ({ currentCreature.XP } XP)
 
 			string fileName = creature.Name + ".json";
 
-			File.WriteAllText(fileName, creatureJsonString);
+			//TODO - check if filenamer already exists; if so, ask to overwrite, rename this one or cancel			
 
-			//Console.WriteLine(File.ReadAllText(fileName));
+
+			File.WriteAllText(fileName, creatureJsonString);
 
 		}
 
 		private void loadCreaturesFromFile() {
+
+			//TODO: throw try around it and reimport missing files
 
 			var fileContext = File.ReadAllText(LIST_FILE_NAME);
 
@@ -734,6 +772,31 @@ Challenge: { currentCreature.CR } ({ currentCreature.XP } XP)
 		private void btn_save_Click(object sender, EventArgs e) {
 
 			saveCreatureState(currentCreature);	
+
+		}
+
+		private void btn_delete_Click(object sender, EventArgs e) {
+
+			//remove creature from list
+			DialogResult importAnswer = MessageBox.Show($"Are you sure you want to delete {currentCreature.Name}?", "Confirm Delete", MessageBoxButtons.YesNo);
+
+			if (importAnswer == DialogResult.Yes) {
+
+				File.Delete(currentCreature.Name + ".json");
+
+				statblocks.Remove(currentCreature);
+
+				var creatureList = new List<string>();
+
+				foreach (var creature in lsb_creatures.Items ?? new ListBox.ObjectCollection(lsb_creatures)) {
+					creatureList.Add(creature.ToString());
+				}
+
+				string jsonString = JsonConvert.SerializeObject(creatureList);
+
+				File.WriteAllText(LIST_FILE_NAME, jsonString);
+
+			}
 
 		}
 	}
