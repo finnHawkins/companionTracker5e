@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.VisualBasic;
 using Newtonsoft.Json;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace dndCompanionTracker {
 	
@@ -616,18 +609,36 @@ Challenge: { currentCreature.CR } ({ currentCreature.XP } XP)
 
 		private void editHealth(bool addHealth) {
 
-			int healthMod, currentHealth, maxHealth, newHealth;
+			int healthMod, currentHealth, maxHealth, newHealth, tempHealth;
 
 			int.TryParse(tb_hpVal.Text, out healthMod);
 			int.TryParse(tb_currHP.Text, out currentHealth);
 			int.TryParse(tb_maxHP.Text, out maxHealth);
-
-			//TODO: Check if temp HP box contains value and if so, edit that first
+			int.TryParse(tb_tempHP.Text, out tempHealth);
 
 			if(addHealth) {
 				newHealth = Math.Min(maxHealth, (currentHealth + healthMod));
 			} else {
-				newHealth = Math.Max(0, (currentHealth - healthMod));
+
+                //TODO: Check if temp HP box contains value and if so, edit that first
+                if (tempHealth > 0)
+                {
+					int newTemp = tempHealth - healthMod;
+
+					if(newTemp > 0)
+					{
+						tb_tempHP.Text = newTemp.ToString();
+
+					} else {
+
+						healthMod -= tempHealth;
+						tb_tempHP.Text = "0";
+
+					}
+
+                }
+
+                newHealth = Math.Max(0, (currentHealth - healthMod));
 			}
 
 			tb_currHP.Text = newHealth.ToString();
